@@ -4,7 +4,7 @@ run-name: ${{ github.actor }} is testing out GitHub Actions
 on:
   # 每隔XX触发
   schedule:
-    - cron: "* * * * *" 
+    - cron: "*/10 * * * *" 
   
   # 允许手动触发
   workflow_dispatch:
