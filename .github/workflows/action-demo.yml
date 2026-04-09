@@ -1,11 +1,57 @@
 name: GitHub Actions Demo
 run-name: ${{ github.actor }} is testing out GitHub Actions
-on: [push]
+
+on:
+
+  # 每24小时触发
+  schedule:
+    - cron: "0 */24 * * *" 
+  
+  # 允许手动触发
+  workflow_dispatch:
+
+  push:
+    branches:
+      - main
 
 jobs:
-  Explore-GitHub-Actions:
+  Test-GitHub-Actions:
     runs-on: ubuntu-latest
+
+    permissions: 
+      contents: write
+
     steps:
+      - name: Checkout Respository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Configure Git
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreplay.github.com"
+
+      - name: Switch To Output Branch
+        run: |
+          if git ls-remote --heads origin output | grep -q output; then
+            git checkout output
+            git pull origin output # 拉最新内容
+          else
+            git checkout --orphan output
+            git rm -rf .
+          fi
+
+      - name: Create File
+        run: |
+          echo "This is a file in $(date)" > demo.txt
+
+      - name: Commit And Push
+        run: |
+          git add .
+          git diff --staged --quiet || git commit -m "Auto-Generate"
+          git push origin output
+
       - name: "信息"
         run: |
           echo "runner.os:          ${{ runner.os }}"
