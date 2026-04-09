@@ -22,25 +22,25 @@ jobs:
       contents: write
 
     steps:
-      - name: Checkout Respository
-        uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
+      # - name: Checkout Respository
+      #   uses: actions/checkout@v4
+      #   with:
+      #     fetch-depth: 0
 
-      - name: Configure Git
-        run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "github-actions[bot]@users.noreplay.github.com"
+      # - name: Configure Git
+      #   run: |
+      #     git config user.name "github-actions[bot]"
+      #     git config user.email "github-actions[bot]@users.noreplay.github.com"
 
-      - name: Switch To Output Branch
-        run: |
-          if git ls-remote --heads origin output | grep -q output; then
-            git checkout output
-            git pull origin output # 拉最新内容
-          else
-            git checkout --orphan output
-            git rm -rf .
-          fi
+      # - name: Switch To Output Branch
+      #   run: |
+      #     if git ls-remote --heads origin output | grep -q output; then
+      #       git checkout output
+      #       git pull origin output # 拉最新内容
+      #     else
+      #       git checkout --orphan output
+      #       git rm -rf .
+      #     fi
 
       - name: Create File
         run: |
