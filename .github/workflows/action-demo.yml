@@ -2,9 +2,9 @@ name: GitHub Actions Demo
 run-name: ${{ github.actor }} is testing out GitHub Actions
 
 on:
-  # 每24小时触发
+  # 每隔XX触发
   schedule:
-    - cron: "0/10 * * * *" 
+    - cron: "* * * * *" 
   
   # 允许手动触发
   workflow_dispatch:
