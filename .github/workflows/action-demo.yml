@@ -46,11 +46,19 @@ jobs:
         run: |
           echo "- 时间: $(date '+%Y-%m-%d %H:%M:%S')" >> README.md
 
+      # - name: Commit And Push
+      #   run: |
+      #     git add .
+      #     git diff --staged --quiet || git commit -m "Auto-Generate"
+      #     git push origin output
+
       - name: Commit And Push
-        run: |
-          git add .
-          git diff --staged --quiet || git commit -m "Auto-Generate"
-          git push origin output
+        uses: crazy-max/ghaction-github-pages@v3.1.0
+        with:
+          target_branch: output
+          build_dir: .
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: "信息"
         run: |
