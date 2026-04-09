@@ -37,7 +37,6 @@ jobs:
           if git ls-remote --heads origin output | grep -q output; then
             git checkout output
             git pull origin output # 拉最新内容
-            git rm -rf .
           else
             git checkout --orphan output
             git rm -rf .
@@ -45,7 +44,7 @@ jobs:
 
       - name: Create File
         run: |
-          echo "开始测试Cron:" >> README.md
+          echo "时间: $(date '+%Y-%m-%d %H:%M:%S')" >> README.md
 
       - name: Commit And Push
         run: |
