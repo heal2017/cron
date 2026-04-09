@@ -44,7 +44,7 @@ jobs:
 
       - name: Create File
         run: |
-          echo "This is a file in $(date)" > demo.txt
+          echo "This is a file in $(date)" > README.$$.md
 
       - name: Commit And Push
         run: |
